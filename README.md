@@ -89,7 +89,7 @@ DualToken is built upon the awesome works
 and [LLaVA](https://github.com/haotian-liu/LLaVA/).
 
 
-## ✍️ Citation
+## 📑 Citation
 
 ```bibtex
 @article{song2025dualtoken,
