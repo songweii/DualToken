@@ -24,7 +24,7 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 ![teaser](asset/unified_model.png)
 
 
-## News
+## 📰 News
 
 - **[2025/03/19]** 🌟 We have released the code and model weights of our tokenizer. More versions are scheduled to be updated. Please stay tuned!
 - **[2025/03/18]** 🌟 We have released the technical report of **DualToken**. See [here](https://arxiv.org/abs/2503.14324)!
@@ -39,13 +39,13 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 > More model weights are on the way & Stay tuned! 🚀
 
 
-## Requirements and Installation
+## 🔧 Requirements and Installation
 
 * Python ≥ 3.11
 * PyTorch ≥ 2.4.1
 * transformers == 4.44.0
 
-## Training
+## 🔥 Training
 
 To train a tokenizer from scratch, run:
 
@@ -79,7 +79,7 @@ bash run.sh
 ## Inference
 
 
-## Acknowledgement
+## 😊 Acknowledgement
 
 DualToken is built upon the awesome works 
 [VILA-U](https://github.com/mit-han-lab/vila-u),
@@ -87,12 +87,7 @@ DualToken is built upon the awesome works
 and [LLaVA](https://github.com/haotian-liu/LLaVA/).
 
 
-## LICENSE
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-## Citation
+## ✍️ Citation
 
 ```bibtex
 @article{song2025dualtoken,
@@ -102,3 +97,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   year={2025} 
 }
 ```
+
+
+## LICENSE
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
