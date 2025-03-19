@@ -30,7 +30,7 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 - **[2025/03/18]** 🌟 We have released the technical report of **DualToken**. See [here](https://arxiv.org/abs/2503.14324)!
 
 
-## Model Zoo
+## 💫 Model Zoo
 
 | Tokenizer Version | Epoch | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
 |:-----------------:|:-----:|:----:|:----------:|:-------:|:---------:|:------------:|
