@@ -1,5 +1,5 @@
 <h2 align="center"> <a href="https://arxiv.org/abs/2503.14324">DualToken: Towards Unifying Visual Understanding and Generation<br>with Dual Visual Vocabularies</a></h2>
-<h5 align="center"> If our project helps you, please give us a star ⭐ and cite our <a href="#citation">paper</a>!</h2>
+<h5 align="center"> If our project helps you, please give us a star ⭐ and cite our <a href="## 📑 Citation">paper</a>!</h2>
 <h5 align="center">
 
 <a href="https://arxiv.org/abs/2503.14324"><img src='https://img.shields.io/badge/arXiv-DualToken-red' alt='Paper PDF'></a>
