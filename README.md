@@ -71,10 +71,12 @@ torchrun --nproc_per_node 4 -m main \
     --workers=1 \
 ```
 
-Or directly run tokenizer training command:
+or you can directly run the tokenizer training command:
+
 ```bash
 bash run.sh
 ```
+
 
 ## Inference
 
