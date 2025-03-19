@@ -12,6 +12,7 @@
     <img src="asset/recon.png" style="width: 31%; height: auto;"/>  
 </div>
 
+
 ## Introduction
 
 This repo implements **DualToken**, a method that unifies representations for both visual understanding and generation within a single tokenizer. Directly integrating reconstruction and semantic objectives in a single tokenizer creates conflicts, leading to degraded performance in both reconstruction quality and semantic performance. Instead of forcing a single codebook to handle both semantic and perceptual information, DualToken disentangles them by introducing separate codebooks for high and low-level features, effectively transforming their inherent conflict into a synergistic relationship. As a result, DualToken achieves state-of-the-art performance in both reconstruction and semantic tasks.
@@ -22,22 +23,28 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 
 ![teaser](asset/unified_model.png)
 
+
 ## News
+
 - **[2025/03/19]** 🌟 We have released the code and model weights of our tokenizer. More versions are scheduled to be updated. Please stay tuned!
 - **[2025/03/18]** 🌟 We have released the technical report of **DualToken**. See [here](https://arxiv.org/abs/2503.14324)!
 
 
 > Coming soon & Stay tuned! 🚀
 
+## Model Zoo
+
+* [Tokenizer (embed_dim = 256)](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link).
+
+
 ## Requirements and Installation
 
-## Model Zoo
-* [Tokenizer (embed_dim = 256)](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link).
 
 ## Inference
 
 
 ## Acknowledgement
+
 DualToken is built upon the awesome works 
 [VILA-U](https://github.com/mit-han-lab/vila-u),
 [OpenCLIP](https://github.com/mlfoundations/open_clip),
@@ -47,6 +54,7 @@ and [LLaVA](https://github.com/haotian-liu/LLaVA/).
 ## LICENSE
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 
 ## Citation
 
