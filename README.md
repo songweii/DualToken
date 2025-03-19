@@ -34,10 +34,17 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 
 ## Model Zoo
 
-* [Tokenizer (embed_dim = 256)](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link).
-
+|   Tokenizer   | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
+|:-------------:|:----:|:----------:|:-------:|:---------:|:------------:|
+| DualToken-256 | 384  |     256    |   729   |   81.6%   | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
 
 ## Requirements and Installation
+
+* Python ≥ 3.11
+* PyTorch ≥ 2.4.1
+* transformers == 4.44.0
+
+## Training
 
 
 ## Inference
