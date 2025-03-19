@@ -8,7 +8,7 @@
 </div>
 
 <div style="display: flex; justify-content: center;">  
-    <img src="asset/bubble.png" style="width: 40%; height: auto;"/>
+    <img src="asset/bubble.png" style="width: 39%; height: auto;"/>
     <img src="asset/recon.png" style="width: 30%; height: auto;"/>  
 </div>
 
