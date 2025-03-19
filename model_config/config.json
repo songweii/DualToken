@@ -48,7 +48,7 @@
       256
     ],
     "model_type": "rqvaesiglip_model",
-    "n_embed": 16384,
+    "n_embed": 32768,
     "pretrained_model": "/your/path/to/siglip-so400m-patch14-384",
     "restart_unused_codes": true,
     "shared_codebook": true,
