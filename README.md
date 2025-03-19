@@ -34,9 +34,9 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 
 ## Model Zoo
 
-|   Tokenizer   | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
-|:-------------:|:----:|:----------:|:-------:|:---------:|:------------:|
-| DualToken-256 | 384  |     256    |   729   |   81.6%   | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
+| Tokenizer Version | Epoch | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
+|:-----------------:|:-----:|:----:|:----------:|:-------:|:---------:|:------------:|
+|  DualToken-dim256 |   8   | 384  |     256    |   729   |   81.6%   | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
 
 ## Requirements and Installation
 
@@ -45,6 +45,9 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 * transformers == 4.44.0
 
 ## Training
+
+To train a tokenizer from scratch, run:
+
 ```bash
 torchrun --nproc_per_node 4 -m main \
     --sem_weight 1 \
@@ -65,6 +68,11 @@ torchrun --nproc_per_node 4 -m main \
     --gan_start_epoch=0 \
     --restart_gan=20 \
     --workers=1 \
+```
+
+Or directly run tokenizer training command:
+```bash
+bash run.sh
 ```
 
 ## Inference
