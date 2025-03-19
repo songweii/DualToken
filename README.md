@@ -30,13 +30,14 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 - **[2025/03/18]** 🌟 We have released the technical report of **DualToken**. See [here](https://arxiv.org/abs/2503.14324)!
 
 
-> Coming soon & Stay tuned! 🚀
-
 ## Model Zoo
 
 | Tokenizer Version | Epoch | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
 |:-----------------:|:-----:|:----:|:----------:|:-------:|:---------:|:------------:|
 |  DualToken-dim256 |   8   | 384  |     256    |   729   |   81.6%   | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
+
+> More model weights are on the way & Stay tuned! 🚀
+
 
 ## Requirements and Installation
 
