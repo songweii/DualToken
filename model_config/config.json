@@ -1,0 +1,61 @@
+{
+  "_name_or_path": "",
+  "architectures": [
+    "RQVAESIGLIPTransformer"
+  ],
+  "hidden_size": 1152,
+  "model_type": "rqvaesigliptransformer_model",
+  "rqvaesiglip": {
+    "architectures": [
+      "RQVAESiglip"
+    ],
+    "bottleneck_type": "rq",
+    "checkpointing": true,
+    "ckpt_path": null,
+    "code_shape": [
+      27,
+      27,
+      8
+    ],
+    "ddconfig": {
+      "attn_resolutions": [
+        24
+      ],
+      "ch": 128,
+      "ch_mult": [
+        1,
+        1,
+        4,
+        4,
+        8
+      ],
+      "decoder_in_channels": 1024,
+      "double_z": false,
+      "dropout": 0.0,
+      "in_channels": 3,
+      "num_res_blocks": 2,
+      "out_ch": 3,
+      "resolution": 384
+    },
+    "decay": 0.99,
+    "embed_dim": 256,
+    "hidden_size": 1152,
+    "decoder_latent_shape": [24, 24],
+    "ignore_keys": null,
+    "latent_shape": [
+      27,
+      27,
+      256
+    ],
+    "model_type": "rqvaesiglip_model",
+    "n_embed": 32768,
+    "pretrained_model": "/global_data/mllm/songwei/model_zoo/siglip-so400m-patch14-384",
+    "restart_unused_codes": true,
+    "shared_codebook": true,
+    "torch_dtype": "float32",
+    "transformers_version": "4.44.0"
+  }
+  ,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.44.0"
+}
