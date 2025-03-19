@@ -81,7 +81,7 @@ bash run.sh
 ## Inference
 
 
-## 😊 Acknowledgement
+## 🙇 Acknowledgement
 
 DualToken is built upon the awesome works 
 [VILA-U](https://github.com/mit-han-lab/vila-u),
