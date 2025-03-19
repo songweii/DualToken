@@ -3,8 +3,8 @@
 <h5 align="center">
 
 <a href="https://arxiv.org/abs/2503.14324"><img src='https://img.shields.io/badge/arXiv-DualToken-red' alt='Paper PDF'></a>
-<a href="https://foundationvision.github.io/DualToken/"><img src='https://img.shields.io/badge/Project_Page-DualToken-green' alt='Project Page'></a>
-<a href="https://huggingface.co/FoundationVision/DualToken_tokenizer"><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
+<a href=""><img src='https://img.shields.io/badge/Project_Page-DualToken-green' alt='Project Page'></a>
+<a href=""><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
 </div>
 
 <div style="display: flex; justify-content: center;">  
