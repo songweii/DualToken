@@ -32,7 +32,7 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 ## Requirements and Installation
 
 ## Model Zoo
-* [Tokenizer (embed_dim = 256)](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link): This preview version features a embedding dimension of 256, with more advanced versions planned for future updates.
+* [Tokenizer (embed_dim = 256)](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link). This preview version features a embedding dimension of 256, with more advanced versions planned for future updates.
 
 ## Inference
 
