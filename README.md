@@ -23,16 +23,16 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 ![teaser](asset/unified_model.png)
 
 ## News
-- **[2025/03/19]** 🌟 We have released the code and model weights for a preview version of our tokenizer (embed_dim = 256). More versions will be updated gradually. Please stay tuned!
+- **[2025/03/19]** 🌟 We have released the code and model weights for a preview version of our tokenizer (embed_dim = 256). More versions are scheduled to be updated. Please stay tuned!
 - **[2025/03/18]** 🌟 We have released the technical report of **DualToken**. See [here](https://arxiv.org/abs/2503.14324)!
 
 
----
 > Coming soon & Stay tuned! 🚀
 
 ## Requirements and Installation
 
 ## Model Zoo
+[Tokenizer (256)](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link)
 
 ## Inference
 
