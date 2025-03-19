@@ -32,9 +32,9 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 
 ## 🤗 Model Zoo
 
-| Tokenizer Version | Epoch | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
-|:-----------------:|:-----:|:----:|:----------:|:-------:|:---------:|:------------:|
-|  DualToken-dim256 |  8/16 | 384  |     256    |   729   |   81.42%  | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
+| Tokenizer Version |  Epoch  | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
+|:-----------------:|:-------:|:----:|:----------:|:-------:|:---------:|:------------:|
+|  DualToken-dim256 |  [8/16] | 384  |     256    |   729   |   81.42%  | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
 
 > More model weights are on the way & Stay tuned! 🚀
 
