@@ -45,7 +45,7 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 * PyTorch ≥ 2.4.1
 * transformers == 4.44.0
 
-## 🔥 Training
+## 🚀 Training
 
 To train a tokenizer from scratch, run:
 
