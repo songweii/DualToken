@@ -93,10 +93,10 @@ and [LLaVA](https://github.com/haotian-liu/LLaVA/).
 
 ```bibtex
 @article{song2025dualtoken,
-  title={DualToken: Towards Unifying Visual Understanding and Generation with Dual Visual Vocabularies}, 
+  title={DualToken: Towards Unifying Visual Understanding and Generation with Dual Visual Vocabularies},
   author={Song, Wei and Wang, Yuran and Song, Zijia and Li, Yadong and Sun, Haoze and Chen, Weipeng and Zhou, Zenan and Xu, Jianhua and Wang, Jiaqi and Yu, Kaicheng},
   journal={arXiv preprint arXiv:2503.14324},
-  year={2025} 
+  year={2025}
 }
 ```
 
