@@ -1,0 +1,21 @@
+export OMP_NUM_THREADS=8
+torchrun --nproc_per_node 8 -m main \
+    --sem_weight 1 \
+    --stage 0 \
+    --name siglip2-256-stage0-freeze26-shortcut24-weight1-mlp-rvq88 \
+    --model "model_config_siglip_256" \
+    --save-frequency 1 \
+    --train-data="/inspire/hdd/project/deepgen/songwei-240108120100/data_tokenizer/cc12/cc12m-train-{0000..2175}.tar" \
+    --train-num-samples 10000000 \
+    --dataset-type "webdataset" \
+    --warmup=100000 \
+    --batch-size=32 \
+    --lr=1e-4 \
+    --beta1=0.9 \
+    --beta2=0.98 \
+    --eps=1e-8 \
+    --wd=1e-4 \
+    --epochs=10 \
+    --gan_start_epoch=0 \
+    --restart_gan=20 \
+    --workers=1

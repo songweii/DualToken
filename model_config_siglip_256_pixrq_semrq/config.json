@@ -1,0 +1,84 @@
+{
+  "_name_or_path": "",
+  "architectures": [
+    "RQVAESIGLIPTransformer"
+  ],
+  "hidden_size": 1152,
+  "model_type": "rqvaesigliptransformer_model",
+  "rqvaesiglip": {
+    "architectures": [
+      "RQVAESiglip"
+    ],
+    "layer_recon": 6,
+    "layer_sem": 26,
+    "layer_shortcut": 4,
+    "weight_shortcut": 0.6,
+    "model_type": "rqvaesiglip_model",
+    "hidden_size": 1152,
+    "ddconfig": {
+      "attn_resolutions": [
+        16
+      ],
+      "ch": 128,
+      "ch_mult": [
+        1,
+        1,
+        4,
+        4,
+        8
+      ],
+      "decoder_in_channels": 1024,
+      "double_z": false,
+      "dropout": 0.0,
+      "in_channels": 3,
+      "num_res_blocks": 2,
+      "out_ch": 3,
+      "resolution": 256
+    },
+    "decoder_latent_shape": [16, 16],
+    "checkpointing": true,
+    "ignore_keys": null,
+    "vq_semantic": {
+      "bottleneck_type": "rq",
+      "ckpt_path": null,
+      "code_shape": [
+        16,
+        16,
+        4
+      ],
+      "decay": 0.99,
+      "embed_dim": 1152,
+      "latent_shape": [
+        16,
+        16,
+        1152
+      ],
+      "n_embed": 16384,
+      "restart_unused_codes": true,
+      "shared_codebook": true
+    },
+    "vq_pixel": {
+      "bottleneck_type": "rq",
+      "ckpt_path": null,
+      "code_shape": [
+        16,
+        16,
+        4
+      ],
+      "decay": 0.99,
+      "embed_dim": 1152,
+      "latent_shape": [
+        16,
+        16,
+        1152
+      ],
+      "n_embed": 16384,
+      "restart_unused_codes": true,
+      "shared_codebook": true
+    },
+    "pretrained_model": "/inspire/hdd/global_user/songwei-240108120100/model_zoo/siglip2-so400m-patch16-256",
+    "torch_dtype": "float32",
+    "transformers_version": "4.50.3"
+  },
+  "transformers_version": "4.50.3"
+}
