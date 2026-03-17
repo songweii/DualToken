@@ -26,7 +26,6 @@ class VQEmbedding(nn.Embedding):
 
         if self.ema:
             _ = [p.requires_grad_(False) for p in self.parameters()]
-
             self.register_buffer('cluster_size_ema', torch.zeros(n_embed))
             self.register_buffer('embed_ema', self.weight[:-1, :].detach().clone())
 

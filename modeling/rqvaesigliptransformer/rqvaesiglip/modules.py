@@ -261,7 +261,6 @@ class AttnBlock(nn.Module):
                                         stride=1,
                                         padding=0)
 
-
     def forward(self, x):
         h_ = x
         h_ = self.norm(h_)
