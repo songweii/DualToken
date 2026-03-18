@@ -38,7 +38,7 @@
     "decoder_latent_shape": [16, 16],
     "checkpointing": true,
     "ignore_keys": null,
-    "vq_semantic": {
+    "vq_sem": {
       "bottleneck_type": "rq",
       "ckpt_path": null,
       "code_shape": [
@@ -57,7 +57,7 @@
       "restart_unused_codes": true,
       "shared_codebook": true
     },
-    "vq_pixel": {
+    "vq_pix": {
       "bottleneck_type": "rq",
       "ckpt_path": null,
       "code_shape": [

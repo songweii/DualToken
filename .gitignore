@@ -1,0 +1,10 @@
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.pyc
+__pycache__/
+.vscode/
+core.*
+logs/
+eval-*/

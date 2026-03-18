@@ -41,12 +41,7 @@ class VQEmbedding(nn.Embedding):
 
         inputs_norm_sq = inputs_flat.pow(2.).sum(dim=1, keepdim=True)
         codebook_t_norm_sq = codebook_t.pow(2.).sum(dim=0, keepdim=True)
-        distances = torch.addmm(
-            inputs_norm_sq + codebook_t_norm_sq,
-            inputs_flat,
-            codebook_t,
-            alpha=-2.0,
-        )
+        distances = torch.addmm(inputs_norm_sq + codebook_t_norm_sq, inputs_flat, codebook_t, alpha=-2.0)
         distances = distances.reshape(*inputs_shape[:-1], -1)
         return distances
 
@@ -54,7 +49,6 @@ class VQEmbedding(nn.Embedding):
     def find_nearest_embedding(self, inputs):
         distances = self.compute_distances(inputs)
         embed_idxs = distances.argmin(dim=-1)
-
         return embed_idxs
 
     @torch.no_grad()
@@ -248,10 +242,11 @@ class RQBottleneck(nn.Module):
         B, h, w, embed_dim = x.shape
 
         residual_feature = x.detach().clone()
+        aggregated_quants = torch.zeros_like(x)
 
         quant_list = []
         code_list = []
-        aggregated_quants = torch.zeros_like(x)
+        
         for i in range(self.code_shape[-1]):
             quant, code = self.codebooks[i](residual_feature)
 
@@ -319,4 +314,4 @@ class RQBottleneck(nn.Module):
             embeds = [self.to_latent_shape(embed.squeeze(-2)).unsqueeze(-2) for embed in embeds]
         embeds = torch.cat(embeds, dim=-2)
         
-        return embeds, None
+        return embeds

@@ -10,8 +10,8 @@ class RQVAESiglipConfig(PretrainedConfig):
         layer_sem=None,
         layer_shortcut=None,
         weight_shortcut=None,
-        vq_semantic=None,
-        vq_pixel=None,
+        vq_sem=None,
+        vq_pix=None,
         ddconfig=None,
         decay=0.99,
         architectures=None,
@@ -27,8 +27,8 @@ class RQVAESiglipConfig(PretrainedConfig):
         self.layer_shortcut = layer_shortcut
         self.weight_shortcut = weight_shortcut
 
-        self.vq_semantic = vq_semantic
-        self.vq_pixel = vq_pixel
+        self.vq_sem = vq_sem
+        self.vq_pix = vq_pix
         self.ddconfig = ddconfig
         self.decay = decay
         self.architectures = architectures

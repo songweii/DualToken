@@ -148,81 +148,71 @@ class RQVAESiglipModel(PreTrainedModel):
             f"layer_recon ({self.layer_recon}) is greater than layer_sem ({self.layer_sem})"
 
         vq_checkpoint = None
-        vq_config_semantic = config.vq_semantic
-        vq_config_pixel = config.vq_pixel
+        vq_config_sem = config.vq_sem
+        vq_config_pix = config.vq_pix
 
-        # self.prequant_semantic = AttnProjection(
-        #     in_dim=config.hidden_size, 
-        #     out_dim=vq_config_semantic["embed_dim"], 
-        #     num_heads=config.hidden_size // vq_config_semantic["embed_dim"]
-        # )
-        # self.prequant_semantic = build_projector(
-        #     dim_in=config.hidden_size, 
-        #     dim_out=vq_config_semantic["embed_dim"], 
-        #     projector_type='mlp2x_gelu'
-        # )
-        self.prequant_pixel = AttnProjection(
+        self.prequant_pix = AttnProjection(
             in_dim=config.hidden_size, 
-            out_dim=vq_config_pixel["embed_dim"], 
-            num_heads=config.hidden_size // vq_config_pixel["embed_dim"]
+            out_dim=vq_config_pix["embed_dim"], 
+            num_heads=config.hidden_size // vq_config_pix["embed_dim"]
         )
-        # self.layer_norm_pixel = nn.LayerNorm(vq_config_pixel["embed_dim"])
+        # self.layer_norm_pix = nn.LayerNorm(vq_config_pix["embed_dim"])
         
-        if vq_config_semantic["bottleneck_type"] == "rq_ema":
-            logging.info("quantizer_semantic: rq_ema")
-            self.quantizer_semantic = RQBottleneck_ema(
-                latent_shape=vq_config_semantic["latent_shape"],
-                code_shape=vq_config_semantic["code_shape"],
-                n_embed=vq_config_semantic["n_embed"],
-                decay=vq_config_semantic["decay"],
-                shared_codebook=vq_config_semantic["shared_codebook"],
-                restart_unused_codes=vq_config_semantic["restart_unused_codes"],
+        if vq_config_sem["bottleneck_type"] == "rq_ema":
+            logging.info("quantizer_sem: rq_ema")
+            self.quantizer_sem = RQBottleneck_ema(
+                latent_shape=vq_config_sem["latent_shape"],
+                code_shape=vq_config_sem["code_shape"],
+                n_embed=vq_config_sem["n_embed"],
+                decay=vq_config_sem["decay"],
+                shared_codebook=vq_config_sem["shared_codebook"],
+                restart_unused_codes=vq_config_sem["restart_unused_codes"],
                 checkpoint=vq_checkpoint
             )
-        elif vq_config_semantic["bottleneck_type"] == "rq":
-            logging.info("quantizer_semantic: rq")
-            self.quantizer_semantic = RQBottleneck(
-                latent_shape=vq_config_semantic["latent_shape"],
-                code_shape=vq_config_semantic["code_shape"],
-                n_embed=vq_config_semantic["n_embed"],
-                decay=vq_config_semantic["decay"],
-                shared_codebook=vq_config_semantic["shared_codebook"],
-                restart_unused_codes=vq_config_semantic["restart_unused_codes"],
-                checkpoint=vq_checkpoint
-            )
-
-        if vq_config_pixel["bottleneck_type"] == "rq_ema":
-            logging.info("quantizer_pixel: rq_ema")
-            self.quantizer_pixel = RQBottleneck_ema(
-                latent_shape=vq_config_pixel["latent_shape"],
-                code_shape=vq_config_pixel["code_shape"],
-                n_embed=vq_config_pixel["n_embed"],
-                decay=vq_config_pixel["decay"],
-                shared_codebook=vq_config_pixel["shared_codebook"],
-                restart_unused_codes=vq_config_pixel["restart_unused_codes"],
-                checkpoint=vq_checkpoint
-            )
-        elif vq_config_pixel["bottleneck_type"] == "rq":
-            logging.info("quantizer_pixel: rq")
-            self.quantizer_pixel = RQBottleneck(
-                latent_shape=vq_config_pixel["latent_shape"],
-                code_shape=vq_config_pixel["code_shape"],
-                n_embed=vq_config_pixel["n_embed"],
-                decay=vq_config_pixel["decay"],
-                shared_codebook=vq_config_pixel["shared_codebook"],
-                restart_unused_codes=vq_config_pixel["restart_unused_codes"],
+        elif vq_config_sem["bottleneck_type"] == "rq":
+            logging.info("quantizer_sem: rq")
+            self.quantizer_sem = RQBottleneck(
+                latent_shape=vq_config_sem["latent_shape"],
+                code_shape=vq_config_sem["code_shape"],
+                n_embed=vq_config_sem["n_embed"],
+                decay=vq_config_sem["decay"],
+                shared_codebook=vq_config_sem["shared_codebook"],
+                restart_unused_codes=vq_config_sem["restart_unused_codes"],
                 checkpoint=vq_checkpoint
             )
 
-        self.postquant_semantic = AttnProjection(
-            in_dim=vq_config_semantic["embed_dim"], 
+        if vq_config_pix["bottleneck_type"] == "rq_ema":
+            logging.info("quantizer_pix: rq_ema")
+            self.quantizer_pix = RQBottleneck_ema(
+                latent_shape=vq_config_pix["latent_shape"],
+                code_shape=vq_config_pix["code_shape"],
+                n_embed=vq_config_pix["n_embed"],
+                decay=vq_config_pix["decay"],
+                shared_codebook=vq_config_pix["shared_codebook"],
+                restart_unused_codes=vq_config_pix["restart_unused_codes"],
+                checkpoint=vq_checkpoint
+            )
+        elif vq_config_pix["bottleneck_type"] == "rq":
+            logging.info("quantizer_pix: rq")
+            self.quantizer_pix = RQBottleneck(
+                latent_shape=vq_config_pix["latent_shape"],
+                code_shape=vq_config_pix["code_shape"],
+                n_embed=vq_config_pix["n_embed"],
+                decay=vq_config_pix["decay"],
+                shared_codebook=vq_config_pix["shared_codebook"],
+                restart_unused_codes=vq_config_pix["restart_unused_codes"],
+                checkpoint=vq_checkpoint
+            )
+
+        self.postquant_sem = AttnProjection(
+            in_dim=vq_config_sem["embed_dim"], 
             out_dim=config.hidden_size, 
-            num_heads=config.hidden_size // vq_config_semantic["embed_dim"]
+            num_heads=config.hidden_size // vq_config_sem["embed_dim"]
         )
-        self.postquant_pixel = AttnProjection(
-            in_dim=vq_config_pixel["embed_dim"], 
+        self.postquant_pix = AttnProjection(
+            in_dim=vq_config_pix["embed_dim"], 
             out_dim=config.hidden_size, 
-            num_heads=config.hidden_size // vq_config_pixel["embed_dim"]
+            num_heads=config.hidden_size // vq_config_pix["embed_dim"]
         )
 
         self.post_quant_conv = PostQuantResnetBlock(
@@ -248,8 +238,8 @@ class RQVAESiglipModel(PreTrainedModel):
 
             self.prequant_shortcut = AttnProjection(
                 in_dim=config.hidden_size, 
-                out_dim=vq_config_pixel["embed_dim"], 
-                num_heads=config.hidden_size // vq_config_pixel["embed_dim"]
+                out_dim=vq_config_pix["embed_dim"], 
+                num_heads=config.hidden_size // vq_config_pix["embed_dim"]
             )
         
 
@@ -284,9 +274,9 @@ class RQVAESiglipModel(PreTrainedModel):
         attention_mask = None
         output_attentions = None
 
-        hidden_state_pixel = None
+        hidden_state_pix = None
         hidden_state_shortcut = None
-        hidden_state_semantic = None
+        hidden_state_sem = None
         
         for i, encoder_layer in enumerate(vision_model.encoder.layers):
             if vision_model.encoder.gradient_checkpointing and vision_model.encoder.training:
@@ -306,7 +296,7 @@ class RQVAESiglipModel(PreTrainedModel):
             hidden_states.append(hidden_state)
 
             if (i + 1) == self.layer_recon:
-                hidden_state_pixel = self.prequant_pixel(hidden_state)
+                hidden_state_pix = self.prequant_pix(hidden_state)
             
             if self.shortcut:
                 if (i + 1) == self.layer_shortcut:
@@ -315,35 +305,35 @@ class RQVAESiglipModel(PreTrainedModel):
             if (i + 1) == self.layer_sem:
                 # pixel
                 if self.shortcut:
-                    hidden_state_pixel += self.weight_shortcut * hidden_state_shortcut
-                B, L, C = hidden_state_pixel.shape
+                    hidden_state_pix += self.weight_shortcut * hidden_state_shortcut
+                B, L, C = hidden_state_pix.shape
                 
-                hidden_state_pixel = hidden_state_pixel.reshape(B, int(L**0.5), int(L**0.5), C)
-                # hidden_state_pixel = self.layer_norm_pixel(hidden_state_pixel)
-                z_q_pixel, quant_loss_pixel, code_pixel = self.quantizer_pixel(hidden_state_pixel)
-                z_q_pixel = z_q_pixel.reshape(B, L, -1)
+                hidden_state_pix = hidden_state_pix.reshape(B, int(L**0.5), int(L**0.5), C)
+                # hidden_state_pix = self.layer_norm_pix(hidden_state_pix)
+                z_q_pix, quant_loss_pix, code_pix = self.quantizer_pix(hidden_state_pix)
+                z_q_pix = z_q_pix.reshape(B, L, -1)
 
                 # semantic
-                # hidden_state_semantic = self.prequant_semantic(hidden_state)
-                hidden_state_semantic = hidden_state
-                B, L, C = hidden_state_semantic.shape
+                # hidden_state_sem = self.prequant_sem(hidden_state)
+                hidden_state_sem = hidden_state
+                B, L, C = hidden_state_sem.shape
 
-                hidden_state_semantic = hidden_state_semantic.reshape(B, int(L**0.5), int(L**0.5), C)
-                z_q_semantic, quant_loss_semantic, code_semantic = self.quantizer_semantic(hidden_state_semantic)
-                z_q_semantic = z_q_semantic.reshape(B, L, -1)
+                hidden_state_sem = hidden_state_sem.reshape(B, int(L**0.5), int(L**0.5), C)
+                z_q_sem, quant_loss_sem, code_sem = self.quantizer_sem(hidden_state_sem)
+                z_q_sem = z_q_sem.reshape(B, L, -1)
                 
-                hidden_state = self.postquant_semantic(z_q_semantic)
+                hidden_state = self.postquant_sem(z_q_sem)
 
         last_hidden_state = hidden_state
         last_hidden_state_norm = vision_model.post_layernorm(last_hidden_state)
         pooler_output = vision_model.head(last_hidden_state_norm) if vision_model.use_head else None
 
-        return z_q_pixel, quant_loss_pixel, code_pixel, z_q_semantic, quant_loss_semantic, code_semantic, hidden_states, pooler_output
+        return z_q_pix, quant_loss_pix, code_pix, z_q_sem, quant_loss_sem, code_sem, hidden_states, pooler_output
 
     
     def decode(self, z_q):
         B, L, C = z_q.shape
-        z_q = self.postquant_pixel(z_q)
+        z_q = self.postquant_pix(z_q)
         z_q = z_q.reshape(B, int(L**0.5), int(L**0.5), -1)
         z_q = z_q.permute(0, 3, 1, 2).contiguous()
         if self.decoder_latent_shape is not None:
@@ -354,16 +344,19 @@ class RQVAESiglipModel(PreTrainedModel):
     
 
     @torch.no_grad()
-    def get_code_emb_with_depth(self, code):
-        return self.quantizer_pixel.embed_code_with_depth(code)
+    def get_code_emb_with_depth(self, code, mode=None):
+        if mode == "pix":
+            return self.quantizer_pix.embed_code_with_depth(code)
+        elif mode == "sem":
+            return self.quantizer_sem.embed_code_with_depth(code)
     
 
     def forward(self, image: Optional[torch.Tensor] = None, text: Optional[torch.Tensor] = None):
 
-        # return z_q_pixel, quant_loss_pixel, code_pixel, z_q_semantic, quant_loss_semantic, code_semantic, hidden_states, pooler_output
+        # return z_q_pix, quant_loss_pix, code_pix, z_q_sem, quant_loss_sem, code_sem, hidden_states, pooler_output
         vision_output = self.encode_image(image) if image is not None else None
-        zq_pixel, quant_loss_pixel, code_pixel = vision_output[0], vision_output[1], vision_output[2]
-        zq_semantic, quant_loss_semantic, code_semantic = vision_output[3], vision_output[4], vision_output[5]
+        zq_pix, quant_loss_pix, code_pix = vision_output[0], vision_output[1], vision_output[2]
+        zq_sem, quant_loss_sem, code_sem = vision_output[3], vision_output[4], vision_output[5]
         hidden_states, pooler_output = vision_output[-2], vision_output[-1]
 
         # normalized features
@@ -374,7 +367,7 @@ class RQVAESiglipModel(PreTrainedModel):
         else:
             text_embeds = None
 
-        images_recon = self.decode(z_q=zq_pixel)
+        images_recon = self.decode(z_q=zq_pix)
 
         clip_loss_dict = {
             "image_features": image_embeds,
@@ -384,7 +377,7 @@ class RQVAESiglipModel(PreTrainedModel):
         if self.siglip_model.logit_bias is not None:
             clip_loss_dict['logit_bias'] = self.siglip_model.logit_bias
 
-        return clip_loss_dict, zq_semantic, hidden_states, pooler_output, images_recon, code_pixel, code_semantic, quant_loss_pixel, quant_loss_semantic
+        return clip_loss_dict, zq_sem, hidden_states, pooler_output, images_recon, code_pix, code_sem, quant_loss_pix, quant_loss_sem
     
 
 AutoConfig.register("rqvaesiglip_model", RQVAESiglipConfig)
