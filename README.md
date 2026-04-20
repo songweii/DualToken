@@ -26,17 +26,17 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 
 ## 📰 News
 
-- **[2025/03/19]** 🌟 We have released the code and model weights of our tokenizer. More versions are scheduled to be updated. Please stay tuned!
+- **[2026/04/21]** 🌟 We have released the inference and training code of our tokenizer. More versions are scheduled to be updated. Please stay tuned!
 - **[2025/03/18]** 🌟 We have released the technical report of **DualToken**. See [here](https://arxiv.org/abs/2503.14324)!
 
 
-## 🤗 Model Zoo
+<!-- ## 🤗 Model Zoo
 
 | Tokenizer Version |  Epoch  | Res. | #Embed_dim |  Tokens | Zero-shot |  Checkpoint  |
 |:-----------------:|:-------:|:----:|:----------:|:-------:|:---------:|:------------:|
 |  DualToken-dim256 |  [8/16] | 384  |     256    |   729   |   81.42%  | [Download](https://drive.google.com/file/d/16-v2skUaDKUSvLo4Zf1OX_9ElGgFVDQN/view?usp=drive_link) |
 
-> More model weights are on the way & Stay tuned! 🚀
+> More model weights are on the way & Stay tuned! 🚀 -->
 
 
 ## 🔧 Requirements and Installation
@@ -54,7 +54,7 @@ torchrun --nproc_per_node 8 -m main \
     --sem_weight 1 \
     --stage 1 \
     --name siglip-384-rvq8 \
-    --model "model_config_siglip_384_rvq8_32d" \
+    --model "model_config_siglip_384_rvq8" \
     --save-frequency 1 \
     --train-data="$YOUR_DATA_PATH/cc12/cc12m-train-{0000..2175}.tar" \
     --train-num-samples 10000000 \

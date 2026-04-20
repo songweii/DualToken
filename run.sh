@@ -3,7 +3,7 @@ torchrun --nproc_per_node 8 -m main \
     --sem_weight 1 \
     --stage 1 \
     --name siglip-384-rvq8 \
-    --model "model_config_siglip_384_rvq8_32d" \
+    --model "model_config_siglip_384_rvq8" \
     --save-frequency 1 \
     --train-data="$YOUR_DATA_PATH/cc12/cc12m-train-{0000..2175}.tar" \
     --train-num-samples 10000000 \

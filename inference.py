@@ -45,7 +45,7 @@ def main(args):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     input_dtype = torch.bfloat16
 
-    vision_tower_path = "model_config"
+    vision_tower_path = "model_config_siglip_384_rvq8"
     model, tokenizer, config, preprocess_train, preprocess_val = create_model_and_transforms(config_path=vision_tower_path, precision="bf16", device=device)
     # model.siglip_model.logit_scale.data = torch.tensor(4.7215, dtype=torch.float32)
     
@@ -60,7 +60,7 @@ def main(args):
     image = image.unsqueeze(0)
 
     with torch.no_grad():
-        clip_loss_dict, hidden_state_26, pooler_output, img_recon, code_pixel, code_semantic, quant_loss_pixel, quant_loss_semantic = model(image, None)
+        clip_loss_dict, zq_semantic, hidden_states, pooler_output, img_recon, code_pixel, code_semantic, quant_loss_pixel, quant_loss_semantic = model(image, None)
     
     image_save_path = f'cat.jpg'
     save_images(image, image_save_path)
