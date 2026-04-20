@@ -17,7 +17,7 @@
     "hidden_size": 1152,
     "ddconfig": {
       "attn_resolutions": [
-        16
+        24
       ],
       "ch": 128,
       "ch_mult": [
@@ -33,25 +33,25 @@
       "in_channels": 3,
       "num_res_blocks": 2,
       "out_ch": 3,
-      "resolution": 256
+      "resolution": 384
     },
-    "decoder_latent_shape": [16, 16],
+    "decoder_latent_shape": [24, 24],
     "checkpointing": true,
     "ignore_keys": null,
     "vq_sem": {
-      "bottleneck_type": "rq",
+      "bottleneck_type": "rq_ema",
       "ckpt_path": null,
       "code_shape": [
-        16,
-        16,
-        4
+        27,
+        27,
+        8
       ],
       "decay": 0.99,
-      "embed_dim": 1152,
+      "embed_dim": 32,
       "latent_shape": [
-        16,
-        16,
-        1152
+        27,
+        27,
+        32
       ],
       "n_embed": 16384,
       "restart_unused_codes": true,
@@ -61,22 +61,22 @@
       "bottleneck_type": "rq",
       "ckpt_path": null,
       "code_shape": [
-        16,
-        16,
-        4
+        27,
+        27,
+        8
       ],
       "decay": 0.99,
-      "embed_dim": 1152,
+      "embed_dim": 32,
       "latent_shape": [
-        16,
-        16,
-        1152
+        27,
+        27,
+        32
       ],
       "n_embed": 16384,
       "restart_unused_codes": true,
       "shared_codebook": true
     },
-    "pretrained_model": "/inspire/hdd/global_user/songwei-240108120100/model_zoo/siglip2-so400m-patch16-256",
+    "pretrained_model": "/mnt/public/users/songwei/model_zoo/siglip2-so400m-patch14-384",
     "torch_dtype": "float32",
     "transformers_version": "4.50.3"
   },

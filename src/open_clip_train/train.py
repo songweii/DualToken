@@ -236,11 +236,13 @@ def train_one_epoch(model, original_state, data, loss, epoch, optimizer, scaler,
                 z_semantic = hidden_states[-2]
                 last_hidden_state = hidden_states[-1]
                 
-                semantic_loss = nn.MSELoss()(z_semantic, z_semantic_gt)
+                # semantic_loss = nn.MSELoss()(z_semantic, z_semantic_gt)
+                semantic_loss = nn.MSELoss()(zq_semantic, z_semantic_gt)
                 semantic_loss_last = nn.MSELoss()(last_hidden_state, last_hidden_state_gt)
                 semantic_loss_pooler = nn.MSELoss()(pooler_output, pooler_output_gt)
 
-                semantic_loss_cos = -F.cosine_similarity(z_semantic, z_semantic_gt, dim=-1).mean()
+                # semantic_loss_cos = -F.cosine_similarity(z_semantic, z_semantic_gt, dim=-1).mean()
+                semantic_loss_cos = -F.cosine_similarity(zq_semantic, z_semantic_gt, dim=-1).mean()
                 semantic_loss_last_cos = -F.cosine_similarity(last_hidden_state, last_hidden_state_gt, dim=-1).mean()
                 semantic_loss_pooler_cos = -F.cosine_similarity(pooler_output, pooler_output_gt, dim=-1).mean()
 

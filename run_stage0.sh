@@ -2,10 +2,10 @@ export OMP_NUM_THREADS=8
 torchrun --nproc_per_node 8 -m main \
     --sem_weight 1 \
     --stage 0 \
-    --name siglip2-256-stage0-freeze26-shortcut24-weight1-mlp-rvq88 \
-    --model "model_config_siglip_256" \
+    --name siglip2-256-rvq4-32d-stage0 \
+    --model "model_config_siglip_256_rvq4_32d" \
     --save-frequency 1 \
-    --train-data="/inspire/hdd/project/deepgen/songwei-240108120100/data_tokenizer/cc12/cc12m-train-{0000..2175}.tar" \
+    --train-data="/mnt/public/users/songwei/data_zoo/data_tokenizer/cc12/cc12m-train-{0000..2175}.tar" \
     --train-num-samples 10000000 \
     --dataset-type "webdataset" \
     --warmup=100000 \

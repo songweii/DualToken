@@ -34,9 +34,19 @@ class RQVAESIGLIPTransformerVisionTower(nn.Module):
             encoder_name = 'ViT-L-16-SigLIP-256'
             self.image_tokens = 256
             # self.config.hidden_size == 1024
+        
+        elif "siglip2-so400m-patch14-384" in encoder_path:
+            encoder_name = 'ViT-SO400M-14-SigLIP2-384'
+            self.image_tokens = 729
+            # self.config.hidden_size == 1152
         elif "siglip-so400m-patch14-384" in encoder_path:
             encoder_name = 'ViT-SO400M-14-SigLIP-384'
             self.image_tokens = 729
+            # self.config.hidden_size == 1152
+        
+        elif "siglip2-so400m-patch16-384" in encoder_path:
+            encoder_name = 'ViT-SO400M-16-SigLIP2-384'
+            self.image_tokens = 576
             # self.config.hidden_size == 1152
         elif "siglip-large-patch16-384" in encoder_path:
             encoder_name = 'ViT-L-16-SigLIP-384'

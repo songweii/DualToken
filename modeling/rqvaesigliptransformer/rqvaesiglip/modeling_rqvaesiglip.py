@@ -23,7 +23,7 @@ from timm.models.layers import get_norm_layer
 
 
 class AttentionBlock(nn.Module):
-    def __init__(self, in_dim, out_dim, num_heads):
+    def __init__(self, in_dim, out_dim, num_heads, is_causal=False):
         super().__init__()
         if in_dim > out_dim:
             # assert in_dim // num_heads == out_dim
@@ -40,6 +40,7 @@ class AttentionBlock(nn.Module):
             self.v_bias = nn.Parameter(torch.zeros(out_dim))
             self.register_buffer('zero_k_bias', torch.zeros(out_dim))
 
+        self.is_causal = is_causal
         self.in_dim = in_dim
         self.out_dim = out_dim
         self.num_heads = num_heads
@@ -51,7 +52,7 @@ class AttentionBlock(nn.Module):
         qkv = F.linear(input=x, weight=self.qkv.weight, bias=torch.cat((self.q_bias, self.zero_k_bias, self.v_bias)))
         q, k, v = qkv.reshape(B, N, 3, self.num_heads, self.head_dim).permute(2, 0, 3, 1, 4).unbind(0)
 
-        x = scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=0., is_causal=False)
+        x = scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=0., is_causal=self.is_causal)
 
         if self.in_dim > self.out_dim:
             x = torch.mean(x, dim=1)
@@ -87,13 +88,13 @@ class GeGluMlp(nn.Module):
 
 
 class AttnProjection(nn.Module):
-    def __init__(self, in_dim, out_dim, num_heads, norm_layer=nn.LayerNorm, mlp_ratio=2):
+    def __init__(self, in_dim, out_dim, num_heads, norm_layer=nn.LayerNorm, mlp_ratio=2, is_causal=False):
         super().__init__()
         assert out_dim % in_dim == 0 or in_dim % out_dim == 0
         self.in_dim = in_dim
         self.out_dim = out_dim
         self.norm1 = norm_layer(in_dim)
-        self.attn = AttentionBlock(in_dim, out_dim, num_heads)
+        self.attn = AttentionBlock(in_dim, out_dim, num_heads, is_causal)
         self.proj = nn.Linear(in_dim, out_dim)
         self.norm3 = norm_layer(in_dim)
 
@@ -151,12 +152,18 @@ class RQVAESiglipModel(PreTrainedModel):
         vq_config_sem = config.vq_sem
         vq_config_pix = config.vq_pix
 
+        self.prequant_sem = AttnProjection(
+            in_dim=config.hidden_size, 
+            out_dim=vq_config_sem["embed_dim"], 
+            num_heads=config.hidden_size // vq_config_sem["embed_dim"],
+            is_causal=False
+        )
         self.prequant_pix = AttnProjection(
             in_dim=config.hidden_size, 
             out_dim=vq_config_pix["embed_dim"], 
-            num_heads=config.hidden_size // vq_config_pix["embed_dim"]
+            num_heads=config.hidden_size // vq_config_pix["embed_dim"],
+            is_causal=False
         )
-        # self.layer_norm_pix = nn.LayerNorm(vq_config_pix["embed_dim"])
         
         if vq_config_sem["bottleneck_type"] == "rq_ema":
             logging.info("quantizer_sem: rq_ema")
@@ -207,12 +214,14 @@ class RQVAESiglipModel(PreTrainedModel):
         self.postquant_sem = AttnProjection(
             in_dim=vq_config_sem["embed_dim"], 
             out_dim=config.hidden_size, 
-            num_heads=config.hidden_size // vq_config_sem["embed_dim"]
+            num_heads=config.hidden_size // vq_config_sem["embed_dim"],
+            is_causal=True
         )
         self.postquant_pix = AttnProjection(
             in_dim=vq_config_pix["embed_dim"], 
             out_dim=config.hidden_size, 
-            num_heads=config.hidden_size // vq_config_pix["embed_dim"]
+            num_heads=config.hidden_size // vq_config_pix["embed_dim"],
+            is_causal=True
         )
 
         self.post_quant_conv = PostQuantResnetBlock(
@@ -239,7 +248,8 @@ class RQVAESiglipModel(PreTrainedModel):
             self.prequant_shortcut = AttnProjection(
                 in_dim=config.hidden_size, 
                 out_dim=vq_config_pix["embed_dim"], 
-                num_heads=config.hidden_size // vq_config_pix["embed_dim"]
+                num_heads=config.hidden_size // vq_config_pix["embed_dim"],
+                is_causal=False
             )
         
 
@@ -314,15 +324,16 @@ class RQVAESiglipModel(PreTrainedModel):
                 z_q_pix = z_q_pix.reshape(B, L, -1)
 
                 # semantic
-                # hidden_state_sem = self.prequant_sem(hidden_state)
-                hidden_state_sem = hidden_state
+                hidden_state_sem = self.prequant_sem(hidden_state)
+                # hidden_state_sem = hidden_state
                 B, L, C = hidden_state_sem.shape
 
                 hidden_state_sem = hidden_state_sem.reshape(B, int(L**0.5), int(L**0.5), C)
                 z_q_sem, quant_loss_sem, code_sem = self.quantizer_sem(hidden_state_sem)
                 z_q_sem = z_q_sem.reshape(B, L, -1)
                 
-                hidden_state = self.postquant_sem(z_q_sem)
+                z_q_sem = self.postquant_sem(z_q_sem)
+                hidden_state = z_q_sem
 
         last_hidden_state = hidden_state
         last_hidden_state_norm = vision_model.post_layernorm(last_hidden_state)

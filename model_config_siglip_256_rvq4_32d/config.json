@@ -47,11 +47,11 @@
         4
       ],
       "decay": 0.99,
-      "embed_dim": 1152,
+      "embed_dim": 32,
       "latent_shape": [
         16,
         16,
-        1152
+        32
       ],
       "n_embed": 16384,
       "restart_unused_codes": true,
@@ -66,17 +66,17 @@
         4
       ],
       "decay": 0.99,
-      "embed_dim": 1152,
+      "embed_dim": 32,
       "latent_shape": [
         16,
         16,
-        1152
+        32
       ],
       "n_embed": 16384,
       "restart_unused_codes": true,
       "shared_codebook": true
     },
-    "pretrained_model": "/inspire/hdd/global_user/songwei-240108120100/model_zoo/siglip2-so400m-patch16-256",
+    "pretrained_model": "/mnt/public/users/songwei/model_zoo/siglip2-so400m-patch16-256",
     "torch_dtype": "float32",
     "transformers_version": "4.50.3"
   },

@@ -1,7 +1,7 @@
 from cleanfid import fid
 
-save_path_gt = "/inspire/hdd/ws-f4d69b29-e0a5-44e6-bd92-acf4de9990f0/public-project/songwei-240108120100/code/DualToken-new/DualToken-attn/eval-attn-18-fp32-v4/gt_results"
-save_path = "/inspire/hdd/ws-f4d69b29-e0a5-44e6-bd92-acf4de9990f0/public-project/songwei-240108120100/code/DualToken-new/DualToken-attn/eval-attn-18-fp32-v4/recon_results"
+save_path_gt = "/mnt/public/users/songwei/code/DualToken-causal-downdim/eval-siglip2-384-rvq8-32d-9/gt_results"
+save_path = "/mnt/public/users/songwei/code/DualToken-causal-downdim/eval-siglip2-384-rvq8-32d-9/recon_results"
 
 print ("Calculating FID Score...")
 # fid_value_clip = fid.compute_fid(save_path_gt, save_path, model_name="clip_vit_b_32", mode="clean")

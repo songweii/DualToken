@@ -1,8 +1,8 @@
 import torch
 from collections import OrderedDict
 
-src = "/inspire/hdd/project/deepgen/songwei-240108120100/DeepGen/opensource/DualToken-zloss/logs/siglip2-256-rvq44-16k-nolast-postquant-pixrq-semrqema-zloss/checkpoints/epoch_7.pt"
-dst = "/inspire/hdd/project/deepgen/songwei-240108120100/DualToken/epoch_7.pt"
+src = "/mnt/public/users/songwei/code/DualToken-causal/epoch_7.pt"
+dst = "/mnt/public/users/songwei/code/DualToken-causal/ckpt/siglip2-256-rvq4-1152d/epoch_7.pt"
 
 ckpt = torch.load(src, map_location="cpu")
 old_sd = ckpt["state_dict"]
