@@ -74,12 +74,15 @@ torchrun --nproc_per_node 8 -m main \
 or you can directly run the tokenizer training command:
 
 ```bash
-bash run_stage1.sh
+bash run.sh
 ```
 
 
 ## Inference
 
+```bash
+python inference.py
+```
 
 ## 🙇 Acknowledgement
 
