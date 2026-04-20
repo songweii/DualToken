@@ -81,8 +81,7 @@ class NetLinLayer(nn.Module):
 class vgg16(torch.nn.Module):
     def __init__(self, requires_grad=False, pretrained=True):
         super(vgg16, self).__init__()
-        # torch.hub.set_dir('.caches')
-        torch.hub.set_dir('/mnt/public/users/songwei/model_zoo/vgg16')
+        torch.hub.set_dir('.caches')
         vgg_pretrained_features = models.vgg16(pretrained=pretrained).features
         self.slice1 = torch.nn.Sequential()
         self.slice2 = torch.nn.Sequential()

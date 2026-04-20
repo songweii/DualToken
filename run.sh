@@ -2,7 +2,7 @@ export OMP_NUM_THREADS=8
 torchrun --nproc_per_node 8 -m main \
     --sem_weight 1 \
     --stage 1 \
-    --name siglip2-384-rvq8-32d-stage1 \
+    --name siglip-384-rvq8 \
     --model "model_config_siglip_384_rvq8_32d" \
     --save-frequency 1 \
     --train-data="$YOUR_DATA_PATH/cc12/cc12m-train-{0000..2175}.tar" \

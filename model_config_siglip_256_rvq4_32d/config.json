@@ -76,7 +76,7 @@
       "restart_unused_codes": true,
       "shared_codebook": true
     },
-    "pretrained_model": "/mnt/public/users/songwei/model_zoo/siglip2-so400m-patch16-256",
+    "pretrained_model": "$PATH_TO_YOUR_MODELS/siglip2-so400m-patch16-256",
     "torch_dtype": "float32",
     "transformers_version": "4.50.3"
   },
