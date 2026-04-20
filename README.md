@@ -24,11 +24,6 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 ![teaser](asset/unified_model.png)
 
 
-## Note
-
-- After careful verification, we have identified inconsistencies between the currently open-sourced version and the unreleased version used in the technical report. We will re-release the corrected code once the issue has been resolved.
-
-
 ## 📰 News
 
 - **[2025/03/19]** 🌟 We have released the code and model weights of our tokenizer. More versions are scheduled to be updated. Please stay tuned!
@@ -55,17 +50,17 @@ Built upon DualToken, we construct an unified MLLM which demonstrates remarkable
 To train a tokenizer from scratch, run:
 
 ```bash
-torchrun --nproc_per_node 4 -m main \
+torchrun --nproc_per_node 8 -m main \
     --sem_weight 1 \
     --stage 1 \
-    --name baseline \
-    --model "model_config" \
+    --name siglip2-384-rvq8-32d-stage1 \
+    --model "model_config_siglip_384_rvq8_32d" \
     --save-frequency 1 \
-    --train-data="$YOUR_DATA_PATH/cc12/cc12m-train-{0000..0255}.tar" \
-    --train-num-samples 1290496 \
+    --train-data="$YOUR_DATA_PATH/cc12/cc12m-train-{0000..2175}.tar" \
+    --train-num-samples 10000000 \
     --dataset-type "webdataset" \
     --warmup=10000 \
-    --batch-size=16 \
+    --batch-size=32 \
     --lr=7.2e-5 \
     --beta1=0.5 \
     --beta2=0.9 \
@@ -73,13 +68,13 @@ torchrun --nproc_per_node 4 -m main \
     --epochs=20 \
     --gan_start_epoch=0 \
     --restart_gan=20 \
-    --workers=1 \
+    --workers=1
 ```
 
 or you can directly run the tokenizer training command:
 
 ```bash
-bash run.sh
+bash run_stage1.sh
 ```
 
 
