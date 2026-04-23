@@ -1,4 +1,4 @@
-<h2 align="center"> <a href="https://arxiv.org/abs/2503.14324">DualToken: Towards Unifying Visual Understanding and Generation<br>with Dual Visual Vocabularies</a></h2>
+# DualToken: Towards Unifying Visual Understanding and Generation with Dual Visual Vocabularies
 <h5 align="center"> If our project helps you, please give us a star ⭐ and <a href="##citation">cite our paper</a>!</h2>
 <h5 align="center">
 
